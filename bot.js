@@ -31,6 +31,10 @@ bot.command (["test", "Test", "test1"], (ctx) => {
 	`)
 })
 
+bot.hears ("json", (ctx) => {
+	ctx.reply ("is a object notation in Java Script")
+})
+
 
 // init bot
 bot.launch ()
