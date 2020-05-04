@@ -54,13 +54,20 @@ bot.hashtag ("hash", (ctx) => {
 
 // on method
 // the "text" is an updatesTypes see on https://telegraf.js.org/#/?id=update-types
-bot.on ("text", (ctx) => {
-	ctx.reply ("You send me a text types")
-})
+//bot.on ("text", (ctx) => {
+//	ctx.reply ("You send me a text types")
+//})
 
 // on method "sicker" updatesTypes
 bot.on ("sticker", (ctx) => {
 	ctx.reply ("You send me a sticker types")
+})
+
+// use method
+bot.use ( (ctx) => {
+	ctx.reply (`hi "${ctx.from.first_name}",
+	you say what?`)
+	console.log (ctx.from.first_name)
 })
 
 // init bot
