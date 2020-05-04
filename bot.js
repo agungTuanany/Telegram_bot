@@ -35,6 +35,22 @@ bot.hears ("json", (ctx) => {
 	ctx.reply ("is a object notation in Java Script")
 })
 
+// handler username eg. @botfather
+bot.mention ("botFather", (ctx) => {
+	ctx.reply ("You using mention method")
+})
+
+
+// Handler phone numbers eg. (+62) 0813-154-154-154
+bot.phone ("+61813-154-154-154", (ctx) => {
+	ctx.reply ("You using Phone method")
+})
+
+
+// Handler hashtags eg. #hash
+bot.hashtag ("hash", (ctx) => {
+	ctx.reply ("you using hashtag method")
+})
 
 // init bot
 bot.launch ()
