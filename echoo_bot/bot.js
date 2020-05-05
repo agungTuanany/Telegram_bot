@@ -7,10 +7,11 @@
 // Dependencies
 const Telegraf		= require ("telegraf")
 
-const env			= ("./../lib/.env")
+const env			= require ("./../lib/.env")
 
 // Instantiate bot
-const bot			= new Telegraf (env.TELEGRAF_API)
+const bot			= new Telegraf (env.TELEGRAF_API_ECHO_BOT)
+
 
 const helpMessage = `
 Say something ..
@@ -26,6 +27,23 @@ bot.start ( (ctx) => {
 bot.help ( (ctx) => {
 	ctx.reply (helpMessage)
 
+})
+
+bot.command ("echo", (ctx) => {
+	let input = ctx.message.text
+	let inputArray = input.split (" ")
+	console.log ("inputArray", inputArray)
+
+	let message = ""
+	if (inputArray.length === 1) {
+		message ="You said Echo"
+	}
+	else {
+		inputArray.shift ()
+		message = inputArray.join (" ")
+	}
+
+	ctx.reply (message)
 })
 
 // init bot
