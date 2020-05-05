@@ -8,9 +8,10 @@
 // Dependecise
 const Telegraf		= require ("telegraf")
 
-const env	= require ("./lib/.env")
+const env			= require ("./../lib/.env")
 
 const bot			= new Telegraf (env.TELEGRAF_API)
+
 
 // Code
 bot.start ( (ctx) => {
