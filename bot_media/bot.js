@@ -19,17 +19,15 @@ const bot = new Telegraf (env.TELEGRAF_API_MEDIA_BOT)
 		bot.command ("test", (ctx) => {
 			URL
 			bot.telegram.sendPhoto (ctx.chat.id, "https://cdn.pixabay.com/photo/2014/08/01/15/51/manhattan-407703_1280.jpg")
-		
+
 			File path
 			bot.telegram.sendPhoto (ctx.chat.id, {
 				source: __dirname+"/res/dubai.jpg"
 			})
-		
+
 			File id
 			bot.telegram.sendPhoto (ctx.chat.id, "AgACAgUAAxkBAAMjXrK165ZFGCPoS-WAwf3d7UrYNFcAAuepMRuL8JBV7KNMLUXo36-P82pqdAADAQADAgADeAADZ7YDAAEZBA" )
 		})
-
-
  */
 
 
