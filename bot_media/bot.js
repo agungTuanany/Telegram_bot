@@ -14,9 +14,29 @@ const env			= require ("./../lib/.env")
 const bot = new Telegraf (env.TELEGRAF_API_MEDIA_BOT)
 
 
-bot.on ("message", (ctx, next) => {
+bot.on ("message", async (ctx, next) => {
 	//	console.log ("ctx.message.photo ====>", ctx.message.photo)
 	//	console.log ("ctx.chat.id ====>", ctx.chat.id)
+	if (ctx.updateSubTypes [0] === "docuement") {
+		try {
+			const link = await bot.telegram.getFileLink (ctx.message.document.file_id)
+			ctx.reply (`Your download link ${link}`)
+		}
+		catch (err) {
+			console.log (err)
+			ctx.reply (err.description)
+		}
+	}
+	else if (ctx.updateSubTypes [0] === "photo") {
+		try {
+			const link = await bot.telegram.getFileLink (ctx.message.photo [0].file_id)
+			ctx.reply (`Your download link ${link}`)
+		}
+		catch (err) {
+			console.log (err)
+			ctx.reply (err.description)
+		}
+	}
 	next ()
 })
 
