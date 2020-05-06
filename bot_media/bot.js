@@ -68,7 +68,17 @@ bot.command ("cities", (ctx) => {
 			}
 		}
 	})
+	bot.telegram.sendChatAction (ctx.chat.id, "upload_photo")
 	bot.telegram.sendMediaGroup (ctx.chat.id, cityResult)
+})
+
+bot.command ("citieslist", (ctx) => {
+	bot.telegram.sendChatAction (ctx.chat.id, "upload_document")
+	bot.telegram.sendDocument (ctx.chat.id,
+		{
+			source		: __dirname+"/res/citieslist.txt"
+		}
+	)
 })
 
 
