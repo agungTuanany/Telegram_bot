@@ -35,6 +35,8 @@ bot.on ("message", (ctx, next) => {
 
 
 bot.command ("newyork", (ctx) => {
+	// https://core.telegram.org/bots/api#sendchataction
+	bot.telegram.sendChatAction (ctx.chat.id, "upload_photo")
 	bot.telegram.sendPhoto (ctx.chat.id,
 		{
 			source: __dirname+"/res/newyork.jpg"
