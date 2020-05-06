@@ -55,6 +55,7 @@ bot.command ("dubai", (ctx) => {
 			reply_to_message_id: ctx.message.message_id
 		}
 	)
+	bot.telegram.sendLocation (ctx.chat.id, 25.0657, 55.17128)
 })
 
 bot.command ("cities", (ctx) => {
@@ -80,7 +81,6 @@ bot.command ("citieslist", (ctx) => {
 		}
 	)
 })
-
 
 // Init bot
 bot.launch ()
