@@ -57,6 +57,20 @@ bot.command ("dubai", (ctx) => {
 	)
 })
 
+bot.command ("cities", (ctx) => {
+	const cities = ["/res/dubai.jpg", "/res/hongkong.jpg", "/res/london.jpg", "/res/newyork.jpg", "/res/singapore.jpg"]
+
+	const cityResult = cities.map (city => {
+		return {
+			type		: "photo",
+			media		: {
+				source	: __dirname+city
+			}
+		}
+	})
+	bot.telegram.sendMediaGroup (ctx.chat.id, cityResult)
+})
+
 
 // Init bot
 bot.launch ()
