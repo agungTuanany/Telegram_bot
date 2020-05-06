@@ -14,7 +14,7 @@ const bot			= new Telegraf (env.TELEGRAF_API_ECHO_BOT)
 
 // Using bot middleware
 bot.use ( (ctx, next) => {
-	if (ctx.updateSubTypes [0] == "text") {
+	if (ctx.updateSubTypes [0] === "text") {
 		//console.log (`${ctx.from.username} said: ${ctx.message.text}`)
 		// message on group
 		bot.telegram.sendMessage (-450493027, `${ctx.from.username} said : ${ctx.message.text}`)
@@ -30,8 +30,10 @@ bot.use ( (ctx, next) => {
 
 const helpMessage = `
 Say something ..
-/start	- start the bot
-/help	- command reference
+/start			- start the bot
+/help			- command reference
+/echo			- say "You said echo"
+/echo <msg>		- echo a message
 `
 
 bot.start ( (ctx) => {
