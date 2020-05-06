@@ -20,19 +20,30 @@ bot.on ("message", (ctx, next) => {
 	next ()
 })
 
-bot.command ("test", (ctx) => {
-	// URL
-	// bot.telegram.sendPhoto (ctx.chat.id, "https://cdn.pixabay.com/photo/2014/08/01/15/51/manhattan-407703_1280.jpg")
+//bot.command ("test", (ctx) => {
+//	 URL
+//	 bot.telegram.sendPhoto (ctx.chat.id, "https://cdn.pixabay.com/photo/2014/08/01/15/51/manhattan-407703_1280.jpg")
+//
+//	 File path
+//	 bot.telegram.sendPhoto (ctx.chat.id, {
+//		source: __dirname+"/res/dubai.jpg"
+//	})
+//
+//	 File id
+//	 bot.telegram.sendPhoto (ctx.chat.id, "AgACAgUAAxkBAAMjXrK165ZFGCPoS-WAwf3d7UrYNFcAAuepMRuL8JBV7KNMLUXo36-P82pqdAADAQADAgADeAADZ7YDAAEZBA" )
+//})
 
-	// File path
-	// bot.telegram.sendPhoto (ctx.chat.id, {
-	//	source: __dirname+"/res/dubai.jpg"
-	//})
 
-	// File id
-	// bot.telegram.sendPhoto (ctx.chat.id, "AgACAgUAAxkBAAMjXrK165ZFGCPoS-WAwf3d7UrYNFcAAuepMRuL8JBV7KNMLUXo36-P82pqdAADAQADAgADeAADZ7YDAAEZBA" )
+bot.command ("newyork", (ctx) => {
+	bot.telegram.sendPhoto (ctx.chat.id,
+		{
+			source: __dirname+"/res/newyork.jpg"
+		},
+		{
+			reply_to_message_id: ctx.message.message_id
+		}
+	)
 })
-
 
 
 // Init bot
