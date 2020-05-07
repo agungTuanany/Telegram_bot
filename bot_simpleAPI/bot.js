@@ -28,7 +28,7 @@ bot.command ("fortune", (ctx) => {
 
 		res.on ("end", () => {
 			const obj = JSON.parse (buffer)
-			console.log (obj)
+			console.log ("=======================>", obj)
 			ctx.reply (obj)
 		})
 	})
@@ -43,7 +43,26 @@ bot.command ("wish", (ctx) => {
 		.catch ( (err) => {
 			console.log (err)
 		})
+})
 
+bot.command ("cat", async (ctx) => {
+	const input			= ctx.message.text
+	const inputArray	= input.split (" ")
+
+	// XXX FIXME: GET method to https://aws.random.cat/meow take more than 10 seconds it's not worth to await?
+	// "/cat"
+	if (inputArray.length === 1) {
+		try {
+			let res = await axios.get ("https://aws.random.cat/meow")
+			console.log ("========================")
+			console.log (res.data.file)
+			console.log ("========================")
+			ctx.replyWithPhoto (res.data.file)
+		}
+		catch (err) {
+			console.log (err)
+		}
+	}
 })
 
 // init bot
