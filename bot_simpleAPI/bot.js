@@ -46,18 +46,32 @@ bot.command ("wish", (ctx) => {
 })
 
 bot.command ("cat", async (ctx) => {
-	const input			= ctx.message.text
-	const inputArray	= input.split (" ")
+	let input			= ctx.message.text
+	let inputArray	= input.split (" ")
 
 	// XXX FIXME: GET method to https://aws.random.cat/meow take more than 10 seconds it's not worth to await?
 	// "/cat"
 	if (inputArray.length === 1) {
 		try {
 			let res = await axios.get ("https://aws.random.cat/meow")
-			console.log ("========================")
+			console.log ("======================== without argument start")
 			console.log (res.data.file)
-			console.log ("========================")
+			console.log ("======================== without argument end")
 			ctx.replyWithPhoto (res.data.file)
+		}
+		catch (err) {
+			console.log (err)
+		}
+	}
+	else {
+		try {
+			console.log ("before=================>", inputArray)
+			console.log ("before=================>", inputArray.length)
+			inputArray.shift ()
+			console.log ("after=================>", inputArray)
+			console.log ("after=================>", inputArray.length )
+			input = inputArray.join (" ")
+			ctx.replyWithPhoto (`https://cataas.com/cat/says/${input}`)
 		}
 		catch (err) {
 			console.log (err)
