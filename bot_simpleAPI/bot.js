@@ -6,6 +6,8 @@
 
 // Dependencies
 const Telegraf			= require ("telegraf")
+const http				= require ("http")
+const axios				= require ("axios")
 
 const env				= require ("./../lib/.env")
 
@@ -15,14 +17,34 @@ const bot = new Telegraf (env.TELEGRAF_API_SIMPLE_API)
 bot.command ("fortune", (ctx) => {
 
 	// Create HTTP request GET to http://yerkee.com/api/fortune
+	// XXX TODO: JSON stringify not parsed correctly
+	http.get ("http://yerkee.com/api/fortune/wisdom", (res) => {
+		let buffer = ""
+
+		// Called when a data chunk is recieved
+		res.on ("data", (chunk) => {
+			buffer += chunk
+		})
+
+		res.on ("end", () => {
+			const obj = JSON.parse (buffer)
+			console.log (obj)
+			ctx.reply (obj)
+		})
+	})
 
 })
 
+bot.command ("wish", (ctx) => {
+	axios.get ("http://yerkee.com/api/fortune/wisdom")
+		.then (res => {
+			ctx.reply (res.data.fortune)
+		})
+		.catch ( (err) => {
+			console.log (err)
+		})
 
-
-
-
-
+})
 
 // init bot
 bot.launch ()
