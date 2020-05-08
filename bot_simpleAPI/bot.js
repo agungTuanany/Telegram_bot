@@ -93,5 +93,26 @@ bot.command ("dogbreeds", (ctx) => {
 	ctx.reply (message)
 })
 
+bot.command ("dog", (ctx) => {
+	let input = ctx.message.text.split (" ")
+	if (input.length != 2) {
+		ctx.reply ("You must give a 'dog' breed as the second argument")
+		//return											  // return keyword for stopping the code in continuing
+	}
+	let breedInput = input [1]
+
+	let rawdata = fs.readFileSync (__dirname+"/dogbreeds.json", "utf8");
+	let data = JSON.parse (rawdata)
+
+	if (data.includes (breedInput)) {
+		axios.get (`https://dog.ceo/api/breed/${breedInput}/images/random`)
+			.then ( (res)  => {
+				console.log (res.data.message)
+				ctx.replyWithPhoto (res.data.message)
+			})
+			.catch ( (err) => console.log (err))
+	}
+})
+
 // init bot
 bot.launch ()
