@@ -39,11 +39,11 @@ bot.action ("price", (ctx) => {
 				inline_keyboard: [
 					[
 						{ text: "Bitcoin", callback_data: "price-BTC" },
-						{ text: "Etherum" , callback_data: "price_ETH" }
+						{ text: "Etherum" , callback_data: "price-ETH" }
 					],
 					[
 						{ text: "Bitcoin cash", callback_data: "price-BCH" },
-						{ text: "Light cash" , callback_data: "price_LTC" }
+						{ text: "Lite Coin" , callback_data: "price-LTC" }
 					],
 					[
 						{ text: "Back to Menu" , callback_data: "start" }
@@ -51,7 +51,48 @@ bot.action ("price", (ctx) => {
 				]
 			}
 		})
+})
 
+let priceActionList = ["price-BTC", "price-ETH", "price-BCH", "price-LTC"]
+
+bot.action (priceActionList, async (ctx) => {
+	let symbol = ctx.match.split ("-")[1]
+
+	try {
+		let res = await axios.get (`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${symbol}&tsyms=USD&api_key=${apiCrypto}`)
+		// Store object axios
+		let data = res.data.DISPLAY[symbol].USD;
+		//console.log (data)
+
+		// Prepare message for user
+		let message = `
+		Symbol		: ${symbol}
+		Price		: ${data.PRICE}
+		Open		: ${data.OPENDAY}
+		High		: ${data.HIGHDAY}
+		Low			: ${data.LOWDAY}
+		Supply		: ${data.SUPPLY}
+		Market Cap	: ${data.MKTCAP}
+		`
+
+		// Delete price Page
+		ctx.deleteMessage ()
+		// Send new Message containing crypto info with back button
+		bot.telegram.sendMessage (ctx.chat.id, message,
+			{
+				reply_markup: {
+					inline_keyboard: [
+						[
+							{ text: "Back to prices", callback_data: "price" }
+						]
+					]
+				}
+			})
+	}
+	catch (err) {
+		console.log ("error", err)
+		ctx.reply ("Error encountered")
+	}
 })
 
 function sendStartMessage (ctx) {
