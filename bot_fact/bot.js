@@ -26,6 +26,7 @@ bot.command ("fact", (ctx) => {
 		return (item.row === "1" && item.col === "2")
 	})[0].val
 
+	// The Math.floor() function returns the largest integer less than or equal to a given number.
 	// Generate random number from 1 to max row
 	let k = Math.floor (Math.random () * maxRow) + 1
 
@@ -33,7 +34,7 @@ bot.command ("fact", (ctx) => {
 	let fact = dataStore.filter ( (item) => {
 		return (item.row == k && item.col == "5")
 	})[0]
-	//console.log (k)
+	console.log ("=============== maxRow", maxRow)
 	console.log ("=============== Fact", fact)
 
 	let message = `
@@ -41,6 +42,17 @@ bot.command ("fact", (ctx) => {
 	${fact.val}
 	`
 	ctx.reply (message)
+})
+
+bot.command ("update", async (ctx) => {
+	try {
+		await getData ()
+		ctx.reply ("The sheet updated")
+	}
+	catch (err) {
+		console.log ("Update error", err)
+		ctx.reply ("Encountered an error while updating sheet")
+	}
 })
 
 
@@ -65,6 +77,7 @@ async function getData () {
 	}
 	catch (err) {
 		console.log (err)
+		throw new Error
 	}
 }
 
