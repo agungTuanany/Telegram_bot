@@ -15,6 +15,26 @@ const env				= require ("./../lib/.env")
 // Instantiate bot
 const bot = new Telegraf (env.TELEGRAF_API_SIMPLE_API)
 
+const helpMessage = `
+*Simple API BOT*
+/fortune			- get a fortune words
+/cat				- get a random cat pic
+/cat \`<text>\`		- get cat image with text
+/dogbreeds			- get list of dog breeds
+/dog \`<breed>\`		- get image of dog breed
+`
+
+bot.help ( (ctx) => {
+	bot.telegram.sendMessage (ctx.from.id, helpMessage,
+		{
+			parse_mode		: "markdown"
+		}
+	)
+})
+
+
+
+
 bot.command ("fortune", (ctx) => {
 
 	// Create HTTP request GET to http://yerkee.com/api/fortune
