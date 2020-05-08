@@ -16,7 +16,31 @@ const env			= require ("./../lib/.env")
 const bot = new Telegraf (env.TELEGRAF_API_CRYPTO_BOT)
 
 bot.command ("test", (ctx) => {
-	ctx.reply ("run test success")
+	bot.telegram.sendMessage (ctx.chat.id, "Welcome",
+		{
+			reply_markup: {
+				inline_keyboard: [
+					[
+						{ text: "one", callback_data: "one" },
+						{ text: "one", callback_data: "one" }
+					],
+					[
+						{ text: "one", callback_data: "one" },
+						{ text: "one", callback_data: "one" },
+						{ text: "one", callback_data: "one" }
+					],
+					[
+						{ text: "one", callback_data: "one" },
+						{ text: "one", callback_data: "one" },
+						{ text: "one", callback_data: "one" },
+						{ text: "one", callback_data: "one" }
+					],
+					[
+						{ text: "one", callback_data: "one" }
+					]
+				]
+			}
+		})
 })
 
 
