@@ -20,6 +20,20 @@ let dataStore = []
 // Invoke getData function when script starts
 getData ()
 
+const helpMessage = `
+*Get a fun fact from spreadSheet*
+/help			- get a help command
+/fact			- get a fact from spreadsheet
+/update			- updating a spreadsheet
+`
+bot.command ("help", (ctx) => {
+	bot.telegram.sendMessage (ctx.from.id, helpMessage,
+		{
+			parse_mode		: "markdown"
+		}
+	)
+})
+
 bot.command ("fact", (ctx) => {
 	// Get max row number
 	let maxRow = dataStore.filter ( (item) => {
