@@ -21,28 +21,17 @@ bot.command ("test", (ctx) => {
 			reply_markup: {
 				inline_keyboard: [
 					[
-						{ text: "one", callback_data: "one" },
-						{ text: "one", callback_data: "one" }
-					],
-					[
-						{ text: "one", callback_data: "one" },
-						{ text: "one", callback_data: "one" },
-						{ text: "one", callback_data: "one" }
-					],
-					[
-						{ text: "one", callback_data: "one" },
-						{ text: "one", callback_data: "one" },
-						{ text: "one", callback_data: "one" },
-						{ text: "one", callback_data: "one" }
-					],
-					[
-						{ text: "one", callback_data: "one" }
+						{ text: "Click me", callback_data: "one" }
 					]
 				]
 			}
 		})
 })
 
+bot.action ("one", (ctx) => {
+	ctx.answerCbQuery ("Popup message")
+	ctx.reply ("You clicked the button")
+})
 
 
 
