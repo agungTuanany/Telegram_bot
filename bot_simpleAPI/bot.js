@@ -97,7 +97,7 @@ bot.command ("dog", (ctx) => {
 	let input = ctx.message.text.split (" ")
 	if (input.length != 2) {
 		ctx.reply ("You must give a 'dog' breed as the second argument")
-		//return											  // return keyword for stopping the code in continuing
+		return		// return keyword for stopping the code in continuing or executing
 	}
 	let breedInput = input [1]
 
@@ -112,6 +112,25 @@ bot.command ("dog", (ctx) => {
 			})
 			.catch ( (err) => console.log (err))
 	}
+	else {
+		let suggestions = data.filter ( (item) => {
+			return item.startsWith (breedInput)
+		})
+
+		let message = `Did you mean:\n`
+
+		suggestions.forEach ( (item) => {
+			message += `${item}\n`
+		})
+
+		if (suggestions.length === 0) {
+			ctx.reply ("Cannot find breed")
+		}
+		else {
+			ctx.reply (message)
+		}
+	}
+
 })
 
 // init bot
