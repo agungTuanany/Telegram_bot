@@ -119,6 +119,14 @@ bot.command ("info", (ctx) => {
 		})
 })
 
+bot.hears ("Credits", (ctx) => {
+	ctx.reply ("This bot was made from online Course by @name")
+})
+
+bot.hears ("API", (ctx) => {
+	ctx.reply ("This bot uses cryptocompare API")
+})
+
 function sendStartMessage (ctx) {
 	let startMessage = "Welcome, this bot gives you cryptocurrency information"
 
