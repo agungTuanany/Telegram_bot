@@ -21,7 +21,26 @@ let dataStore = []
 getData ()
 
 bot.command ("fact", (ctx) => {
-	ctx.reply ("fact")
+	// Get max row number
+	let maxRow = dataStore.filter ( (item) => {
+		return (item.row === "1" && item.col === "2")
+	})[0].val
+
+	// Generate random number from 1 to max row
+	let k = Math.floor (Math.random () * maxRow) + 1
+
+	// Get fact object that matches row with randomly generated number
+	let fact = dataStore.filter ( (item) => {
+		return (item.row == k && item.col == "5")
+	})[0]
+	//console.log (k)
+	console.log ("=============== Fact", fact)
+
+	let message = `
+	FACT #${fact.row}
+	${fact.val}
+	`
+	ctx.reply (message)
 })
 
 
@@ -37,12 +56,12 @@ async function getData () {
 		// Process data into dataStore
 		data.forEach ( (item) => {
 			dataStore.push ({
-				row			: item.gs$cell.row,
-				col			: item.gs$cell.col,
-				val			: item.gs$cell.inputValue
+				row	: item.gs$cell.row,
+				col	: item.gs$cell.col,
+				val	: item.gs$cell.inputValue
 			})
 		})
-		console.log (dataStore)
+		//console.log ("============= dataStore from getData", dataStore)
 	}
 	catch (err) {
 		console.log (err)
