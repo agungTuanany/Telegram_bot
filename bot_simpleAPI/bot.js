@@ -33,11 +33,8 @@ bot.help ( (ctx) => {
 })
 
 
-
-
 bot.command ("fortune", (ctx) => {
 
-	// Create HTTP request GET to http://yerkee.com/api/fortune
 	// XXX TODO: JSON stringify not parsed correctly
 	http.get ("http://yerkee.com/api/fortune/wisdom", (res) => {
 		let buffer = ""
