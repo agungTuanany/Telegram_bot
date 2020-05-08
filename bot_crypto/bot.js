@@ -55,6 +55,7 @@ bot.action ("price", (ctx) => {
 
 let priceActionList = ["price-BTC", "price-ETH", "price-BCH", "price-LTC"]
 
+// Callback query handler for "price"
 bot.action (priceActionList, async (ctx) => {
 	let symbol = ctx.match.split ("-")[1]
 
@@ -93,6 +94,29 @@ bot.action (priceActionList, async (ctx) => {
 		console.log ("error", err)
 		ctx.reply ("Error encountered")
 	}
+})
+
+// Callback query handler for "info"
+bot.command ("info", (ctx) => {
+	// Answer callback query
+
+	// Send message to invoke and open reply keyboard
+	bot.telegram.sendMessage (ctx.chat.id, "Bot Info",
+		{
+			reply_markup: {
+				keyboard: [
+					[
+						{ text: "Credits" },
+						{ text: "API" }
+					],
+					[
+						{ text: "Remove Keyboard" }
+					]
+				],
+				resize_keyboard: true,
+				one_time_keyboard: true,
+			}
+		})
 })
 
 function sendStartMessage (ctx) {
