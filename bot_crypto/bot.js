@@ -119,12 +119,24 @@ bot.command ("info", (ctx) => {
 		})
 })
 
+// Handlers text message for "Credits"
 bot.hears ("Credits", (ctx) => {
 	ctx.reply ("This bot was made from online Course by @name")
 })
 
+// Handlers text message for "API"
 bot.hears ("API", (ctx) => {
 	ctx.reply ("This bot uses cryptocompare API")
+})
+
+// Handlers text message for "Remove Keyboard" & remove keyboard on user's interface
+bot.hears ("Remove Keyboard", (ctx) => {
+	bot.telegram.sendMessage (ctx.chat.id, "Remove Keyboard",
+		{
+			reply_markup: {
+				remove_keyboard: true
+			}
+		})
 })
 
 function sendStartMessage (ctx) {
