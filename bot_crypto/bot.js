@@ -12,8 +12,33 @@ const axios			= require ("axios")
 // Buildin dependencies
 const env			= require ("./../lib/.env")
 
+const apiCrypto = env.CRYPTO_COMPARE_API_BOT
+
 // Instantiate bot
 const bot = new Telegraf (env.TELEGRAF_API_CRYPTO_BOT)
+
+bot.command ("start", (ctx) => {
+	let startMessage = "Welcome, this bot gives you cryptocurrency information"
+
+	bot.telegram.sendMessage (ctx.chat.id, startMessage,
+		{
+			reply_markup: {
+				inline_keyboard: [
+					[
+						{ text: "Crypto Prices", callback_data: "price" }
+					],
+					[
+						{ text: "CoinMarketCup", url : "https://coinmarketcap.com/" }
+					]
+				]
+			}
+
+		})
+})
+
+
+
+
 
 bot.command ("test", (ctx) => {
 	bot.telegram.sendMessage (ctx.chat.id, "Main Menu",
