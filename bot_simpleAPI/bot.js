@@ -8,6 +8,7 @@
 const Telegraf			= require ("telegraf")
 const http				= require ("http")
 const axios				= require ("axios")
+const fs				= require ("fs")
 
 const env				= require ("./../lib/.env")
 
@@ -65,11 +66,11 @@ bot.command ("cat", async (ctx) => {
 	}
 	else {
 		try {
-			console.log ("before=================>", inputArray)
-			console.log ("before=================>", inputArray.length)
+			console.log ("=================> before", inputArray)
+			console.log ("=================> before", inputArray.length)
 			inputArray.shift ()
-			console.log ("after=================>", inputArray)
-			console.log ("after=================>", inputArray.length )
+			console.log ("=================> after", inputArray)
+			console.log ("=================> after", inputArray.length )
 			input = inputArray.join (" ")
 			ctx.replyWithPhoto (`https://cataas.com/cat/says/${input}`)
 		}
@@ -77,6 +78,19 @@ bot.command ("cat", async (ctx) => {
 			console.log (err)
 		}
 	}
+})
+
+bot.command ("dogbreeds", (ctx) => {
+	let rawdata = fs.readFileSync (__dirname+"/dogbreeds.json", "utf8");
+	let data = JSON.parse (rawdata)
+	console.log (data)
+
+	let message = "Dog breeds: \n"
+	data.forEach ( (item) => {
+		message += `${item}\n`
+	})
+
+	ctx.reply (message)
 })
 
 // init bot
