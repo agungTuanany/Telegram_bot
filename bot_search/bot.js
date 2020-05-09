@@ -64,6 +64,13 @@ bot.on ("inline_query", async (ctx) => {
 				message_text	: `#{item\n${allLinks [index]}}`
 			},
 			description			: allLinks [index],
+			reply_markup		: {
+				inline_keyboard	: [
+					[
+						{ text: `Share ${item}`, switch_inline_query: `${item}` }
+					]
+				]
+			}
 		}
 
 	})
