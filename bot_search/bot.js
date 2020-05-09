@@ -12,9 +12,19 @@ const axios			= require ("axios")
 const env			= require ("./../lib/.env")
 
 const bot		= new Telegraf (env.TELEGRAF_API_SEARCH_BOT)
+const apikey	= env.PIXABAY_API
 
-const.command ("test", (ctx) => {
+bot.command ("test", (ctx) => {
 	ctx.reply ("Hello wolrd")
+})
+
+bot.on ("inline_query", async (ctx) => {
+	
+	const query = ctx.inlineQuery.query
+
+	const res = await axios.get (`https://pixabay.com/api/?key=${apikey}&q=${query}`)
+	const data = res.data.hits
+	console.log (data)
 })
 
 // Init bot
