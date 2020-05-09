@@ -32,7 +32,9 @@ bot.on ("inline_query", async (ctx) => {
 			photo_url			: item.webformatURL,
 			thumb_url			: item.previewURL,
 			photo_width			: 300,
-			photo_height		: 200
+			photo_height		: 200,
+			caption				: `[Source](${item.webformatURL})\n[Large Image](${item.largeImageURL})`,
+			parse_mode			: 'Markdown'
 		}
 	})
 
