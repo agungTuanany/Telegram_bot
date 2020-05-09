@@ -14,12 +14,9 @@ const env			= require ("./../lib/.env")
 const bot		= new Telegraf (env.TELEGRAF_API_SEARCH_BOT)
 const apikey	= env.PIXABAY_API
 
-bot.command ("test", (ctx) => {
-	ctx.reply ("Hello wolrd")
-})
 
 //handler for /start and /help command
-bot.command(['start', 'help'], ctx => {
+bot.command(['start', 'help'], (ctx) => {
 	//set welcome message
 	const message = `
 Welcome to Search Bot!
@@ -45,8 +42,39 @@ Use the inline mode below
 	})
 })
 
+bot.inlineQuery (['start', 'help'], (ctx) => {
+	let message = `
+Welcome to Search Bot!
+Use the inline mode below
+@s300bot pixa <search image>
+@s300bot wiki <search wiki>
+`;
+
+	const result = [
+		{
+			type			: "article",
+			id				: "1",
+			title			: "Help Reference",
+			input_message_content	: {
+				message_text	: message
+			},
+			description		: "Sends help message on how to use bot",
+			reply_markup	: {
+				inline_keyboard	: [
+					[
+						{ text: "Search Pixabay Image", switch_inline_query_current_chat: "pixa" }
+					],
+					[
+						{ text: "Search Wiki", switch_inline_query_current_chat: "wiki" }
+					]
+				]
+			}
+		}
+	]
 
 
+	ctx.answerInlineQuery (result)
+})
 
 
 bot.inlineQuery (/pixa\s.+/, async (ctx) => {
@@ -103,7 +131,7 @@ bot.inlineQuery (/wiki\s.+/, async (ctx) => {
 			reply_markup		: {
 				inline_keyboard	: [
 					[
-						{ text: `Share ${item}`, switch_inline_query: `${item}` }
+						{ text: `Share ${item}`, switch_inline_query: `wiki ${item}` }
 					]
 				]
 			}
